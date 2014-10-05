@@ -10,10 +10,10 @@ namespace DelacorteNumbers
         {
             var numbers = Enumerable.Range(1, n).ToList();
 
-            return Permute(numbers);
+            return RecursivePermute(numbers);
         }
 
-        private static IEnumerable<IEnumerable<int>> Permute(List<int> input)
+        private static IEnumerable<IEnumerable<int>> RecursivePermute(List<int> input)
         {
             if (input.Count() == 1)
             {
@@ -26,7 +26,7 @@ namespace DelacorteNumbers
                 var output = new List<int>();
                 output.Add(selected);
                 var inputMinusSelected = input.Except(new List<int> {selected}).ToList();
-                foreach (var subPermute in Permute(inputMinusSelected))
+                foreach (var subPermute in RecursivePermute(inputMinusSelected))
                 {
                     yield return output.Concat(subPermute);
                 }

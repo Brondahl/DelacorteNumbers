@@ -42,7 +42,10 @@ namespace DelacorteNumbers
 
         public static string TableHeaderString()
         {
-            return "|   A ,   B | GCD | Dist | Product |";
+            return @"
+------------------------------------
+|   A ,   B | GCD | Dist | Product |
+------------------------------------";
         }
     }
 }
