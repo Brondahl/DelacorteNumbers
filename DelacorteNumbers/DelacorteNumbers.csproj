@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DelacorteGrid.cs" />
+    <Compile Include="DelacorteGridEvaluator.cs" />
     <Compile Include="ExhaustiveSearch.cs" />
     <Compile Include="GCD.cs" />
     <Compile Include="GridPoint.cs" />

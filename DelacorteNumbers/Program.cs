@@ -10,7 +10,7 @@ namespace DelacorteNumbers
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var x = new Stopwatch();
             x.Start();

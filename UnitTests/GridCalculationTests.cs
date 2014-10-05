@@ -9,11 +9,19 @@ namespace UnitTests
     public class GridCalculationTests
     {
         [Test]
-        public void ZimmermansGridValueIsCalculatedCorrectly()
+        public void ZimmermansGridValueIsCalculatedCorrectlyFromArray()
         {
             var arrayInput = new int[3, 2] { { 6, 4 }, { 5, 1 }, { 2, 3 } };
-            var grid = new DelacorteGrid(arrayInput);
-            grid.Number().Should().Be(53);
+            var grid = new DelacorteGridEvaluator(arrayInput);
+            grid.Evaluate().Should().Be(53);
+        }
+
+        [Test]
+        public void ZimmermansGridValueIsCalculatedCorrectlyFromGridObject()
+        {
+            var arrayInput = new int[3, 2] { { 6, 4 }, { 5, 1 }, { 2, 3 } };
+            var grid = new DelacorteGridEvaluator(new DelacorteGrid(arrayInput));
+            grid.Evaluate().Should().Be(53);
         }
 
         [Test,

@@ -33,34 +33,37 @@ namespace DelacorteNumbers
         {
             foreach (var grid in GenerateGrids())
             {
-                var delacorteGrid = new DelacorteGrid(grid);
-                var result = delacorteGrid.Number();
+                var result = new DelacorteGridEvaluator(grid).Evaluate();
 
                 if (result >= bestScore)
                 {
                     bestScore = result;
-                    bestGrid = delacorteGrid;
-                    Console.WriteLine(delacorteGrid);
+                    bestGrid = grid;
+                    Console.WriteLine(grid + "   ==  " + result);
                 }
                 if (result <= worstScore)
                 {
                     worstScore = result;
-                    worstGrid = delacorteGrid;
-                    Console.WriteLine(delacorteGrid);
+                    worstGrid = grid;
+                    Console.WriteLine(grid + "   ==  " + result);
                 }
             }
 
-            Console.WriteLine(bestGrid);
-            Console.WriteLine(bestScore);
-            Console.WriteLine(worstGrid);
-            Console.WriteLine(worstScore);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Console.WriteLine("Best:");
+            Console.WriteLine(bestGrid + "   ==  " + bestScore);
+            Console.WriteLine("Worst:");
+            Console.WriteLine(worstGrid + "   ==  " + worstScore);
         }
 
-        private IEnumerable<int[,]> GenerateGrids()
+        private IEnumerable<DelacorteGrid> GenerateGrids()
         {
             foreach (var permutation in NumberPermuter.GeneratePermutationsLists(N*N))
             {
-                yield return ListToGrid(permutation);
+                yield return new DelacorteGrid(ListToGrid(permutation));
             }
         }
 
