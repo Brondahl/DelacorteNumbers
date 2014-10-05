@@ -49,6 +49,7 @@
     <Compile Include="ExhaustiveSearch.cs" />
     <Compile Include="GCD.cs" />
     <Compile Include="GridPoint.cs" />
+    <Compile Include="GridSubValue.cs" />
     <Compile Include="NumberPermuter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

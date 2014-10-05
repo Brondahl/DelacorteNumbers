@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DelacorteNumbers
 {
@@ -8,7 +9,6 @@ namespace DelacorteNumbers
         private readonly int xMax;
         private readonly int yMax;
         private readonly int[,] array;
-        private int[,] arrayInput;
 
         public DelacorteGridEvaluator(DelacorteGrid grid)
         {
@@ -27,21 +27,37 @@ namespace DelacorteNumbers
         public int Evaluate()
         {
             int total = 0;
-            var values = new List<int>();
             foreach (var gridPoint in simpleGridIterator)
             {
-                foreach (var secondGridPoint in GridIteratorAfterExcluding(gridPoint))
+                foreach (var secondGridPoint in GridIteratorStrictlyAfter(gridPoint))
                 {
-                    var value =
+                    total +=
                         GCD.Of(gridPoint.Number, secondGridPoint.Number) *
                         SquareDistance.FromPoints(gridPoint, secondGridPoint);
-
-                    values.Add(value);
-                    total += value;
                 }
             }
 
             return total;
+        }
+
+
+        public void BreakDown()
+        {
+            var values = new List<GridSubValue>();
+            foreach (var gridPoint in simpleGridIterator)
+            {
+                foreach (var secondGridPoint in GridIteratorStrictlyAfter(gridPoint))
+                {
+                    var subValue = new GridSubValue(gridPoint, secondGridPoint);
+                    values.Add(subValue);
+                }
+            }
+
+            Console.WriteLine(GridSubValue.TableHeaderString());
+            foreach (var val in values.OrderByDescending(val => val.ProductValue))
+            {
+                Console.WriteLine(val);
+            }
         }
 
         private IEnumerable<GridPoint> simpleGridIterator
@@ -58,7 +74,7 @@ namespace DelacorteNumbers
             }
         }
 
-        private IEnumerable<GridPoint> GridIteratorAfterExcluding(GridPoint start)
+        private IEnumerable<GridPoint> GridIteratorStrictlyAfter(GridPoint start)
         {
             var first = true;
             foreach (var point in GridIteratorAfterIncluding(start))
