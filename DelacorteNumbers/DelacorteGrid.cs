@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml.Linq;
 
 namespace DelacorteNumbers
 {
@@ -36,5 +39,39 @@ namespace DelacorteNumbers
             return line.ToString();
         }
 
+
+        public List<int> IdentifyUnusedValues()
+        {
+            var allUnusedNumbers = Enumerable.Range(1, X*Y).ToList();
+            foreach (var i in Array)
+            {
+                allUnusedNumbers.Remove(i);
+            }
+            return allUnusedNumbers;
+        }
+
+        internal DelacorteGrid FillToCreateNewGrid(IEnumerable<int> permutation)
+        {
+            var output = new DelacorteGrid((int[,]) Array.Clone());
+            output.FillWith(permutation);
+            return output;
+        }
+
+        private void FillWith(IEnumerable<int> permutation)
+        {
+            var permEnum = permutation.GetEnumerator();
+
+            for (int i = 0; i < X; i++)
+            {
+                for (int j = 0; j < Y; j++)
+                {
+                    if (Array[i, j] == 0)
+                    {
+                        permEnum.MoveNext();
+                        Array[i, j] = permEnum.Current;
+                    }
+                }
+            }
+        }
     }
 }

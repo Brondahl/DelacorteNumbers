@@ -9,7 +9,11 @@ namespace DelacorteNumbers
         public static IEnumerable<IEnumerable<int>> GeneratePermutationsLists(int n)
         {
             var numbers = Enumerable.Range(1, n).ToList();
+            return GeneratePermutationsOfList(numbers);
+        }
 
+        internal static IEnumerable<IEnumerable<int>> GeneratePermutationsOfList(List<int> valuesToPermute)
+        {
             return RecursivePermuteWithDepth(valuesToPermute, valuesToPermute.Count);
         }
 

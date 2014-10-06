@@ -14,9 +14,18 @@ namespace DelacorteNumbers
 
         public IEnumerable<DelacorteGrid> GenerateAllGridsFromScratch()
         {
-            foreach (var permutation in NumberPermuter.GeneratePermutationsLists(N*N))
+            foreach (var permutation in NumberPermuter.GeneratePermutationsLists(N * N))
             {
                 yield return new DelacorteGrid(ListToGridByListIndex(permutation));
+            }
+        }
+
+        public IEnumerable<DelacorteGrid> GenerateAllGridsGivenPartialGrid(DelacorteGrid startingGrid)
+        {
+            List<int> remainingValuesToBeFilled = startingGrid.IdentifyUnusedValues();
+            foreach (var permutation in NumberPermuter.GeneratePermutationsOfList(remainingValuesToBeFilled))
+            {
+                yield return startingGrid.FillToCreateNewGrid(permutation);
             }
         }
 
