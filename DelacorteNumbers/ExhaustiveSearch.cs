@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,25 +31,35 @@ namespace DelacorteNumbers
             worstScore = lowerTarget;
         }
 
-        internal void Run()
+        public void RunWithDuplicates()
         {
-            foreach (var grid in generator.GenerateAllGridsFromScratch())
+            Run(true);
+        }
+
+        public void RunWithoutDuplicates()
+        {
+            Run(false);
+        }
+
+        private void Run(bool displayGridsMatchingBest)
+        {
+            Parallel.ForEach(generator.GenerateAllGridsFromScratch(), grid =>
             {
                 var result = new DelacorteGridEvaluator(grid).Evaluate();
 
-                if (result >= bestScore)
+                if (result > bestScore || (displayGridsMatchingBest && result == bestScore))
                 {
                     bestScore = result;
                     bestGrid = grid;
                     Console.WriteLine(grid + "   ==  " + result);
                 }
-                if (result <= worstScore)
+                if (result < worstScore || (displayGridsMatchingBest && result == worstScore))
                 {
                     worstScore = result;
                     worstGrid = grid;
                     Console.WriteLine(grid + "   ==  " + result);
                 }
-            }
+            });
 
             Console.WriteLine();
             Console.WriteLine();
