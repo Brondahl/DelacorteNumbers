@@ -1,5 +1,6 @@
 ﻿using System;
 using DelacorteNumbers;
+using DelacorteNumbers.Calculations;
 using FluentAssertions;
 using NUnit.Framework;
 

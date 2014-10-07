@@ -1,4 +1,4 @@
-﻿namespace DelacorteNumbers
+﻿namespace DelacorteNumbers.Calculations
 {
     public static class GCD
     {

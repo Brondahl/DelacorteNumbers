@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DelacorteNumbers;
+using DelacorteNumbers.Calculations;
 using FluentAssertions;
 using NUnit.Framework;
 
