@@ -12,7 +12,7 @@ namespace DelacorteNumbers
     {
         static void Main()
         {
-            FillAllPermutesTest();
+            PermuteTimeBenchmark();
         }
 
         private static void FillTest()
@@ -61,7 +61,7 @@ namespace DelacorteNumbers
             Console.WriteLine(x.ElapsedMilliseconds);
         }
 
-        static void TimeBenchmark()
+        static void FullSearchTimeBenchmark()
         {
             var x = new Stopwatch();
             x.Start();
@@ -73,14 +73,21 @@ namespace DelacorteNumbers
             Console.WriteLine(x.ElapsedMilliseconds);
         }
 
-        static void OtherTimeBenchmark()
+        static void PermuteTimeBenchmark()
         {
-            var x = new Stopwatch();
-            x.Start();
-            NumberPermuter.GeneratePermutationsLists(10).ToList();
-            x.Stop();
-            Console.WriteLine("Completed");
-            Console.WriteLine(x.ElapsedMilliseconds);
+            for (int i = 0; i < 1; i++)
+            {
+                var x = new Stopwatch();
+                x.Start();
+                List<int> y = null;
+                foreach (var force in NumberPermuter.GeneratePermutationsLists(11))
+                {   
+                    y = force.ToList();
+                }
+                Console.WriteLine(y);
+                x.Stop();
+                Console.WriteLine(x.ElapsedMilliseconds);
+            }
         }
     }
 }
