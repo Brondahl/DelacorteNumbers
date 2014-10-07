@@ -13,7 +13,7 @@ namespace DelacorteNumbers
     {
         static void Main()
         {
-            PermuteTimeBenchmark();
+            ExhSearchSimple(4);
         }
 
         private static void FillTest()
@@ -66,9 +66,10 @@ namespace DelacorteNumbers
         {
             var x = new Stopwatch();
             x.Start();
-            new ExhaustiveSearch(3).RunWithoutDuplicates();
-            new ExhaustiveSearch(3).RunWithoutDuplicates();
-            new ExhaustiveSearch(3).RunWithoutDuplicates();
+            for (int i = 0; i < 50; i++)
+            {
+                new ExhaustiveSearch(3).RunWithoutDuplicates();
+            }
             x.Stop();
             Console.WriteLine("Completed");
             Console.WriteLine(x.ElapsedMilliseconds);
