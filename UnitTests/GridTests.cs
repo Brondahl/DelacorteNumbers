@@ -1,4 +1,5 @@
-﻿using DelacorteNumbers;
+﻿using System.Collections.Generic;
+using DelacorteNumbers;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -40,7 +41,7 @@ namespace UnitTests
         [Test]
         public void FilledGridShouldReportNoMissingNumbers()
         {
-            var arrayInput = new int[3, 3] { { 2, 3, 4 }, { 9, 0, 5 }, { 0, 7, 0 } };
+            var arrayInput = new int[3, 3] { { 2, 3, 4 }, { 9, DelacorteGrid.UNSPECIFIED, 5 }, { DelacorteGrid.UNSPECIFIED, 7, DelacorteGrid.UNSPECIFIED } };
             var providedPermutation = new[] { 1, 6, 8 };
             var filledGrid = new DelacorteGrid(arrayInput).FillToCreateNewGrid(providedPermutation);
             filledGrid.IdentifyUnusedValues().ShouldBeEquivalentTo(new int[] { });
@@ -49,7 +50,7 @@ namespace UnitTests
         [Test]
         public void GridFillShouldInsertNumbersInTheAppropriateOrder()
         {
-            var arrayInput = new int[3, 3] { { 2, 3, 4 }, { 9, 0, 5 }, { 0, 7, 0 } };
+            var arrayInput = new int[3, 3] { { 2, 3, 4 }, { 9, DelacorteGrid.UNSPECIFIED, 5 }, { DelacorteGrid.UNSPECIFIED, 7, DelacorteGrid.UNSPECIFIED } };
             var providedPermutation = new[] { 8, 1, 6 };
             var filledGrid = new DelacorteGrid(arrayInput).FillToCreateNewGrid(providedPermutation);
             filledGrid.Array.Should().Equal(new int[3, 3] { { 2, 3, 4 }, { 9, 8, 5 }, { 1, 7, 6 } });

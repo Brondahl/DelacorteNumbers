@@ -2,11 +2,13 @@
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using MoreLinq;
 
 namespace DelacorteNumbers
 {
     public class DelacorteGrid
     {
+        public static int UNSPECIFIED = default(int); //So that it matches an uninitialised Array.
         public readonly int X;
         public readonly int Y;
         public readonly int[,] Array;
@@ -73,7 +75,7 @@ namespace DelacorteNumbers
             {
                 for (int j = 0; j < Y; j++)
                 {
-                    if (Array[i, j] == 0)
+                    if (Array[i, j] == UNSPECIFIED)
                     {
                         permEnum.MoveNext();
                         Array[i, j] = permEnum.Current;
