@@ -13,7 +13,7 @@ namespace DelacorteNumbers
     {
         static void Main()
         {
-            ExhSearchSimple(4);
+            GridFillTimeBenchmark();
         }
 
         private static void FillTest()
@@ -77,19 +77,37 @@ namespace DelacorteNumbers
 
         static void PermuteTimeBenchmark()
         {
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 10; i++)
             {
                 var x = new Stopwatch();
                 x.Start();
                 List<int> y = null;
-                foreach (var force in NumberPermuter.GeneratePermutationsLists(11))
-                {   
+                foreach (var force in NumberPermuter.GeneratePermutationsLists(10))
+                {
                     y = force.ToList();
                 }
                 Console.WriteLine(y);
                 x.Stop();
                 Console.WriteLine(x.ElapsedMilliseconds);
             }
+        }
+
+        static void GridFillTimeBenchmark()
+        {
+            var x = new Stopwatch();
+            x.Start();
+            for (int i = 0; i < 50; i++)
+            {
+                DelacorteGrid y = null;
+                foreach (var force in new GridGenerator(3).GenerateAllGridsFromScratch())
+                {
+                    y = force;
+                }
+                Console.WriteLine(y);
+            }
+            x.Stop();
+            Console.WriteLine("Completed");
+            Console.WriteLine(x.ElapsedMilliseconds);
         }
     }
 }
