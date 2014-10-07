@@ -13,8 +13,8 @@ namespace DelacorteNumbers
         private readonly GridGenerator generator;
         private DelacorteGrid bestGrid;
         private DelacorteGrid worstGrid;
-        private int bestScore;
-        private int worstScore;
+        public int BestScore;
+        public int WorstScore;
 
 
         public ExhaustiveSearch(int n) : this (n, int.MinValue, int.MaxValue)
@@ -27,8 +27,8 @@ namespace DelacorteNumbers
 
             bestGrid = null;
             worstGrid = null;
-            bestScore = upperTarget;
-            worstScore = lowerTarget;
+            BestScore = upperTarget;
+            WorstScore = lowerTarget;
         }
 
         public void RunWithDuplicates()
@@ -47,15 +47,15 @@ namespace DelacorteNumbers
             {
                 var result = new DelacorteGridEvaluator(grid).Evaluate();
 
-                if (result > bestScore || (displayGridsMatchingBest && result == bestScore))
+                if (result > BestScore || (displayGridsMatchingBest && result == BestScore))
                 {
-                    bestScore = result;
+                    BestScore = result;
                     bestGrid = grid;
                     Console.WriteLine(grid + "   ==  " + result);
                 }
-                if (result < worstScore || (displayGridsMatchingBest && result == worstScore))
+                if (result < WorstScore || (displayGridsMatchingBest && result == WorstScore))
                 {
-                    worstScore = result;
+                    WorstScore = result;
                     worstGrid = grid;
                     Console.WriteLine(grid + "   ==  " + result);
                 }
@@ -66,9 +66,9 @@ namespace DelacorteNumbers
             Console.WriteLine();
 
             Console.WriteLine("Best:");
-            Console.WriteLine(bestGrid + "   ==  " + bestScore);
+            Console.WriteLine(bestGrid + "   ==  " + BestScore);
             Console.WriteLine("Worst:");
-            Console.WriteLine(worstGrid + "   ==  " + worstScore);
+            Console.WriteLine(worstGrid + "   ==  " + WorstScore);
         }
     }
 }
