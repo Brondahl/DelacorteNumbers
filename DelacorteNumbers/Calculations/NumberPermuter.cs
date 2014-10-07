@@ -59,6 +59,35 @@ namespace DelacorteNumbers.Calculations
 
         //ncrunch: no coverage start
         [Obsolete("RecursivePermuteWithDepthAndArrayUnroll is a far more efficient Algorithm")]
+        private static IEnumerable<int[]> RecursivePermuteWithDepthAndArrayCopy(int[] input, int depth)
+        {
+            if (depth == 1)
+            {
+                yield return input;
+                yield break;
+            }
+
+            for (int i = 0; i < depth; i++)
+            {
+                var output = new int[depth];
+                output[0] = input[i];
+
+                // Copy input into reducedInput, excluding the i-th entry (which we just put into output)
+                var reducedInput = new int[depth - 1];
+                Array.Copy(input, 0, reducedInput, 0, i - 0);
+                Array.Copy(input, i + 1, reducedInput, i, depth - (i + 1));
+
+                foreach (var subPermute in RecursivePermuteWithDepthAndArrayCopy(reducedInput, depth - 1))
+                {
+                    Array.Copy(subPermute, 0, output, 1, depth - 1);
+                    yield return output;
+                }
+            }
+        }
+        //ncrunch: no coverage end
+
+        //ncrunch: no coverage start
+        [Obsolete("RecursivePermuteWithDepthAndArrayUnroll is a far more efficient Algorithm")]
         private static IEnumerable<IEnumerable<int>> RecursivePermuteWithListOnly(List<int> input)
         {
             if (input.Count() == 1)
