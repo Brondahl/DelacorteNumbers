@@ -18,6 +18,14 @@ namespace DelacorteNumbers
             Array = inputArray;
         }
 
+        public DelacorteGrid(int x, int y, IEnumerable<int> input)
+        {
+            X = x;
+            Y = y;
+            Array = new int[x, y];
+            FillWith(input);
+        }
+
         public override string ToString()
         {
             var line = new StringBuilder();

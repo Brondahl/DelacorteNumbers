@@ -16,6 +16,20 @@ namespace UnitTests
         }
 
         [Test]
+        public void GridListConstructorShouldWorkOnSquareGrids()
+        {
+            var grid = new DelacorteGrid(3, 3, new List<int> { 2, 3, 4,     9, 0, 5,     0, 7, 0 });
+            grid.Array.Should().Equal(new int[3, 3] { { 2, 3, 4 }, { 9, 0, 5 }, { 0, 7, 0 } });
+        }
+
+        [Test]
+        public void GridListConstructorShouldWorkOnRectangularGrids()
+        {
+            var grid = new DelacorteGrid(3, 2, new List<int> { 2, 3,   4, 9,   0, 5 });
+            grid.Array.Should().Equal(new int[3, 2] { { 2, 3 }, { 4, 9 }, { 0, 5 } });
+        }
+
+        [Test]
         public void GridShouldBeAbleToReportUnusedNumbers()
         {
             var arrayInput = new int[3, 3] { { 2, 3, 4 }, { 9, 0, 5 }, { 0, 7, 0 } };
