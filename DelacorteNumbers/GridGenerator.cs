@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DelacorteNumbers.Calculations;
@@ -17,7 +18,7 @@ namespace DelacorteNumbers
         {
             foreach (var permutation in NumberPermuter.GeneratePermutationsLists(N * N))
             {
-                yield return new DelacorteGrid(ListToGridByListIndex(permutation));
+                yield return new DelacorteGrid(ListToGridByTripleLoop(permutation));
             }
         }
 
@@ -30,7 +31,46 @@ namespace DelacorteNumbers
             }
         }
 
-        private int[,] ListToGridByListIndex(IEnumerable<int> permutation)
+        private int[,] ListToGridByTripleLoop(IEnumerable<int> permutation)
+        {
+            var permEnum = permutation.GetEnumerator();
+            var multiDimOutput = new int[N, N];
+
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    permEnum.MoveNext();
+                    multiDimOutput[i, j] = permEnum.Current;
+                }
+            }
+            return multiDimOutput;
+        }
+
+        //ncrunch: no coverage start
+        [Obsolete("ListToGridByTripleLoop is a more efficient Algorithm")]
+        private int[,] ListToGridByCalculatingGridCell(IEnumerable<int> permutation)
+        {
+            var multiDimOutput = new int[N, N];
+            int xCounter = 0;
+            int yCounter = 0;
+            foreach (var value in permutation)
+            {
+                multiDimOutput[xCounter, yCounter] = value;
+                yCounter++;
+                if (yCounter == N)
+                {
+                    yCounter = 0;
+                    xCounter++;
+                }
+            }
+            return multiDimOutput;
+        }
+        //ncrunch: no coverage end
+
+        //ncrunch: no coverage start
+        [Obsolete("ListToGridByTripleLoop is a more efficient Algorithm")]
+        private int[,] ListToGridByCalculatingListIndex(IEnumerable<int> permutation)
         {
             var perm = permutation.ToList();
             var multiDimOutput = new int[N, N];
@@ -38,18 +78,22 @@ namespace DelacorteNumbers
             {
                 for (int j = 0; j < N; j++)
                 {
-                    multiDimOutput[i, j] = perm[i *N + j];
+                    multiDimOutput[i, j] = perm[i * N + j];
                 }
             }
 
             return multiDimOutput;
         }
+        //ncrunch: no coverage end
 
+        //ncrunch: no coverage start
+        [Obsolete("ListToGridByTripleLoop is a more efficient Algorithm")]
         private int[,] ListToGridByLinqAndConvert(IEnumerable<int> permutation)
         {
             var jaggedArray = permutation.Batch(N).Select(Enumerable.ToArray).ToArray();
             return JaggedToMultiDim(N, jaggedArray);
         }
+        //ncrunch: no coverage end
 
         private int[,] JaggedToMultiDim(int n, int[][] jaggedInput)
         {
