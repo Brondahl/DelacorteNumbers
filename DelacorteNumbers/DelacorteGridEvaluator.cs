@@ -42,7 +42,7 @@ namespace DelacorteNumbers
         }
 
 
-        public void BreakDown()
+        public List<GridSubValue> BreakDown()
         {
             var values = new List<GridSubValue>();
             foreach (var gridPoint in simpleGridIterator)
@@ -59,6 +59,8 @@ namespace DelacorteNumbers
             {
                 Console.WriteLine(val);
             }
+
+            return values;
         }
 
         private IEnumerable<GridPoint> simpleGridIterator
@@ -77,23 +79,8 @@ namespace DelacorteNumbers
 
         private IEnumerable<GridPoint> GridIteratorStrictlyAfter(GridPoint start)
         {
-            var first = true;
-            foreach (var point in GridIteratorAfterIncluding(start))
-            {
-                if (first)
-                {
-                    first = false;
-                    continue;
-                }
-
-                yield return point;
-            }
-        }
-
-        private IEnumerable<GridPoint> GridIteratorAfterIncluding(GridPoint start)
-        {
-            //Complete that Column
-            for (int j = start.Y; j < yMax; j++)
+            //Complete that Column, skipping the first value (if Y+1 = yMax, loop doesn't execute)
+            for (int j = start.Y+1; j < yMax; j++)
             {
                 yield return new GridPoint(start.X, j, array[start.X, j]);
             }
