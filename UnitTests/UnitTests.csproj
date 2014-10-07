@@ -62,7 +62,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BruteForcerToolsTests.cs" />
-    <Compile Include="GridCalculationTests.cs" />
+    <Compile Include="GridTests.cs" />
+    <Compile Include="GridEvaluationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

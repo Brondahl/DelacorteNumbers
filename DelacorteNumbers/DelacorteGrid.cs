@@ -50,7 +50,7 @@ namespace DelacorteNumbers
             return allUnusedNumbers;
         }
 
-        internal DelacorteGrid FillToCreateNewGrid(IEnumerable<int> permutation)
+        public DelacorteGrid FillToCreateNewGrid(IEnumerable<int> permutation)
         {
             var output = new DelacorteGrid((int[,]) Array.Clone());
             output.FillWith(permutation);

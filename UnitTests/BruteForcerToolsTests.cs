@@ -25,10 +25,9 @@ namespace UnitTests
             if (x.All(val => val))
             {
                 Assert.Pass();
-
             }
             else
-            {
+            {   //This test is innaccurate, but gives a much more debuggable output.
                 predicted.Should().Equal(output);
             }
         }
@@ -45,10 +44,9 @@ namespace UnitTests
             if (x.All(val => val))
             {
                 Assert.Pass();
-
             }
             else
-            {
+            {   //This test is innaccurate, but gives a much more debuggable output.
                 predicted.Should().Equal(output);
             }
         }
@@ -73,10 +71,9 @@ namespace UnitTests
             if (x.All(val => val))
             {
                 Assert.Pass();
-
             }
             else
-            {
+            {   //This test is innaccurate, but gives a much more debuggable output.
                 predicted.Should().Equal(output);
             }
         }
