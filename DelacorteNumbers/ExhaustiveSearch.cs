@@ -10,7 +10,7 @@ namespace DelacorteNumbers
 {
     public class ExhaustiveSearch
     {
-        private readonly GridGenerator generator;
+        private readonly IEnumerable<DelacorteGrid> gridsGenerated;
         private DelacorteGrid bestGrid;
         private DelacorteGrid worstGrid;
         public int BestScore;
@@ -23,8 +23,16 @@ namespace DelacorteNumbers
 
         public ExhaustiveSearch(int n, int upperTarget, int lowerTarget)
         {
-            generator = new GridGenerator(n);
+            gridsGenerated = new GridGenerator(n).GenerateAllGridsFromScratch();
+            bestGrid = null;
+            worstGrid = null;
+            BestScore = upperTarget;
+            WorstScore = lowerTarget;
+        }
 
+        public ExhaustiveSearch(DelacorteGrid startingGrid, int n, int upperTarget, int lowerTarget)
+        {
+            gridsGenerated = new GridGenerator(n).GenerateAllGridsGivenPartialGrid(startingGrid);
             bestGrid = null;
             worstGrid = null;
             BestScore = upperTarget;
@@ -43,7 +51,7 @@ namespace DelacorteNumbers
 
         private void Run(bool displayGridsMatchingBest)
         {
-            Parallel.ForEach(generator.GenerateAllGridsFromScratch(), grid =>
+            Parallel.ForEach(gridsGenerated, grid =>
             {
                 var result = new DelacorteGridEvaluator(grid).Evaluate();
 

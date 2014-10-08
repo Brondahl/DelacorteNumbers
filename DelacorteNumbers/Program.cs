@@ -13,26 +13,73 @@ namespace DelacorteNumbers
     {
         static void Main()
         {
-            GridFillTimeBenchmark();
+            AssessConceptualBoundsOfLowScore();
         }
 
-        private static void FillTest()
-        {
-            var arrayInput = new int[3, 3] { { 2, 3, 4 }, { 9, 0, 5 }, { 8, 7, 0 } };
-            var x = new DelacorteGrid(arrayInput);
-            var y = x.FillToCreateNewGrid(new[] {6,1});
-            Console.WriteLine(y.ToString());
-        }
 
-        private static void FillAllPermutesTest()
+        private static void Solve4x4Max()
         {
-            var arrayInput = new int[3, 3] { { 2, 3, 4 }, { 9, 0, 5 }, { 0, 7, 0 } };
-            var x = new DelacorteGrid(arrayInput);
-            var y = x.FillToCreateNewGrid(new[] { 6, 1, 8 });
-            foreach (var grid in new GridGenerator(3).GenerateAllGridsGivenPartialGrid(x))
+            var template = new DelacorteGrid(4, 4, new[]
             {
-                Console.WriteLine(grid.ToString());
+                8, 0, 0, 12,
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+                4, 0, 0, 16
+            });
+
+            var x = new Stopwatch();
+            x.Start();
+            new ExhaustiveSearch(template, 4, int.MinValue, int.MinValue).RunWithDuplicates();
+            x.Stop();
+            Console.WriteLine("Completed");
+            Console.WriteLine(x.ElapsedMilliseconds);
+        }
+
+        private static void Solve4x4Min()
+        {
+            var template = new DelacorteGrid(4, 4, new[]
+            {
+                16, 6, 0, 0,
+                8, 0, 0, 0,
+                0, 0, 0, 0,
+                0, 0, 0, 0
+            });
+
+            var x = new Stopwatch();
+            x.Start();
+            new ExhaustiveSearch(template, 4, int.MaxValue, int.MaxValue).RunWithDuplicates();
+            x.Stop();
+            Console.WriteLine("Completed");
+            Console.WriteLine(x.ElapsedMilliseconds);
+        }
+
+        private static void OtherScript()
+        {
+            var template = new DelacorteGrid(4, 4, new[]
+            {
+                8, 0, 0, 12,
+                0, 0, 0, 14,
+                7, 0, 0, 0,
+                6, 4, 0, 16
+            });
+
+            var collection = new GridGenerator(4)
+                .GenerateAllGridsGivenPartialGrid(template)
+                .Select(grid => new DelacorteGridEvaluator(grid).Evaluate());
+
+            Console.WriteLine(collection.Max());
+            Console.WriteLine(collection.Min());
+            var histogram = collection.GroupBy(i => i).OrderBy(i => i.Key).ToDictionary(group => group.Key, group => group.Count());
+            foreach (var entry in histogram)
+            {
+                Console.WriteLine(entry.Key + "|" + entry.Value);
             }
+        }
+
+        private static void AssessConceptualBoundsOfLowScore()
+        {
+            var grid = new DelacorteGrid(4,4, Enumerable.Repeat(1,16));
+            new DelacorteGridEvaluator(grid).BreakDown();
         }
 
         private static void BreakdownOfWinning3Grid()
