@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
@@ -37,7 +38,7 @@ namespace DelacorteNumbers
                 line.Append("(");
                 for (int j = 0; j < Y; j++)
                 {
-                    line.Append(Array[i, j] + ",");
+                    line.Append(String.Format("{0,2:##}", Array[i, j]) + ",");
                 }
                 line.Append("),");
             }

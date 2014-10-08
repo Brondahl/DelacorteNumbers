@@ -13,7 +13,7 @@ namespace UnitTests
         {
             var arrayInput = new int[3, 2] { { 6, 4 }, { 5, 1 }, { 2, 3 } };
             var grid = new DelacorteGrid(arrayInput);
-            grid.ToString().Should().Be("(6,4),(5,1),(2,3);");
+            grid.ToString().Should().Be("( 6, 4),( 5, 1),( 2, 3);");
         }
 
         [Test]
