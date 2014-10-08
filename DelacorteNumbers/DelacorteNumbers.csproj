@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculations\Primes.cs" />
     <Compile Include="DelacorteGrid.cs" />
     <Compile Include="DelacorteGridEvaluator.cs" />
     <Compile Include="ExhaustiveSearch.cs" />
