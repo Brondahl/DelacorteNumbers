@@ -13,24 +13,46 @@ namespace DelacorteNumbers
     {
         static void Main()
         {
-            AssessConceptualBoundsOfLowScore();
+            PermuteTimeBenchmark();
         }
 
-
-        private static void Solve4x4Max()
+        private static void Solve5x5Max(DelacorteGrid template)
         {
-            var template = new DelacorteGrid(4, 4, new[]
-            {
-                8, 0, 0, 12,
-                0, 0, 0, 0,
-                0, 0, 0, 0,
-                4, 0, 0, 16
-            });
+            //var template = new DelacorteGrid(5, 5, new[]
+            //{
+            //    8, 0, 0, 12,0,
+            //    0, 0, 0, 0,0,
+            //    0, 0, 0, 0,0,
+            //    6, 4, 0, 16,0,
+            //    6, 4, 0, 17,0
+            //});
 
+            Console.WriteLine(template);
+            var x = new Stopwatch();
+            x.Start();
+            new ExhaustiveSearch(template, 5, int.MinValue, int.MinValue).RunWithDuplicates();
+            x.Stop();
+            Console.WriteLine(template);
+            Console.WriteLine("Completed");
+            Console.WriteLine(x.ElapsedMilliseconds);
+        }
+
+        private static void Solve4x4Max(DelacorteGrid template)
+        {
+            //var template = new DelacorteGrid(4, 4, new[]
+            //{
+            //    8, 0, 0, 12,
+            //    0, 0, 0, 0,
+            //    0, 0, 0, 0,
+            //    6, 4, 0, 16
+            //});
+
+            Console.WriteLine(template);
             var x = new Stopwatch();
             x.Start();
             new ExhaustiveSearch(template, 4, int.MinValue, int.MinValue).RunWithDuplicates();
             x.Stop();
+            Console.WriteLine(template);
             Console.WriteLine("Completed");
             Console.WriteLine(x.ElapsedMilliseconds);
         }
@@ -76,6 +98,14 @@ namespace DelacorteNumbers
             }
         }
 
+        private static void CalculateDenseLayouts()
+        {
+            for (int i = 0; i < 36; i++)
+            {
+                
+            }
+        }
+
         private static void AssessConceptualBoundsOfLowScore()
         {
             var grid = new DelacorteGrid(4,4, Enumerable.Repeat(1,16));
@@ -87,6 +117,18 @@ namespace DelacorteNumbers
             var arrayInput = new int[3, 3] { { 2, 3, 4 }, { 9, 1, 5 }, { 8, 7, 6 } };
             new DelacorteGrid(arrayInput);
             new DelacorteGridEvaluator(arrayInput).BreakDown();
+        }
+
+        private static void BreakdownOfTemplate()
+        {
+            var template = new DelacorteGrid(4, 4, new[]
+            {
+                8, 0, 0, 12,
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+                4, 6, 0, 16
+            });
+            new DelacorteGridEvaluator(template).BreakDown();
         }
 
         static void ExhSearch3Limited()
