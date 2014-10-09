@@ -129,7 +129,7 @@ namespace DelacorteNumbers
                 var x = new Stopwatch();
                 x.Start();
                 List<int> y = null;
-                foreach (var force in NumberPermuter.GeneratePermutationsLists(10))
+                foreach (var force in SimpleNumberPermuter.GeneratePermutationsLists(10))
                 {
                     y = force.ToList();
                 }

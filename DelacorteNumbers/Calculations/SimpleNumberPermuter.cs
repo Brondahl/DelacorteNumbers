@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DelacorteNumbers.Calculations
 {
-    public static class NumberPermuter
+    public static class SimpleNumberPermuter
     {
         public static IEnumerable<IEnumerable<int>> GeneratePermutationsLists(int n)
         {
@@ -28,11 +28,10 @@ namespace DelacorteNumbers.Calculations
 
             for (int i = 0; i < depth; i++)
             {
-                var output = new int[depth];
-                output[0] = input[i];
+                //we can't initialise and populate the output here, otherwise we'd return multiple references to the same array object.
+                int firstElementOfOutput = input[i];
 
-
-                // Copy input into reducedInput, excluding the i-th entry (which we just put into output) - LeftInline for performance
+                // Copy input into reducedInput, excluding the i-th entry (which we will just put into the output) - Left Inline for performance (Array.Copy() not performant for short arrays)
                 var reducedInput = new int[depth - 1];
                 for (int j = 0; j < i; j++)
                 {
@@ -46,7 +45,10 @@ namespace DelacorteNumbers.Calculations
 
                 foreach (var subPermute in RecursivePermuteWithDepthAndArrayUnroll(reducedInput, depth - 1))
                 {
-                    // Copy subPermute into output, after the first entry which we populated above - LeftInline for performance
+                    var output = new int[depth];
+                    output[0] = firstElementOfOutput;
+
+                    // Copy subPermute into output, after the first entry which we just added - LeftInline for performance (Array.Copy() not performant for short arrays)
                     for (int j = 0; j < depth - 1; j++)
                     {
                         output[j + 1] = subPermute[j];

@@ -61,6 +61,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="SimpleNumberPermuterTests.cs" />
     <Compile Include="BruteForcerToolsTests.cs" />
     <Compile Include="GridSubValueTests.cs" />
     <Compile Include="PrimesTests.cs" />

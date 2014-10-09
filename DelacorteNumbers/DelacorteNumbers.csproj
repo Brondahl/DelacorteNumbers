@@ -52,7 +52,7 @@
     <Compile Include="GridGenerator.cs" />
     <Compile Include="GridPoint.cs" />
     <Compile Include="GridSubValue.cs" />
-    <Compile Include="Calculations\NumberPermuter.cs" />
+    <Compile Include="Calculations\SimpleNumberPermuter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Calculations\SquareDistance.cs" />
