@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculations\NumberPermuterWithRepeats.cs" />
     <Compile Include="Calculations\Primes.cs" />
     <Compile Include="DelacorteGrid.cs" />
     <Compile Include="DelacorteGridEvaluator.cs" />
