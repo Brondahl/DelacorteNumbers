@@ -1,4 +1,6 @@
-﻿namespace DelacorteNumbers.Calculations
+﻿using System.Linq;
+
+namespace DelacorteNumbers.Calculations
 {
     public static class GCD
     {
@@ -9,7 +11,7 @@
 
         private static readonly int[][] Table =
         {
-            new[] {0},
+            Enumerable.Repeat(0,625).ToArray(),
             new[]
             {
                 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
